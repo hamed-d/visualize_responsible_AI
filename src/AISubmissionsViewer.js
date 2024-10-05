@@ -31,6 +31,10 @@ const AISubmissionsViewer = () => {
     setExpandedOrgs(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  // Assuming your GitHub repository is named "ai-submissions-viewer"
+  // Update this baseUrl if your repository has a different name
+  const baseUrl = "https://github.com/hamed-d/visualize_responsible_AI/blob/main/public/api/files/";
+
   return (
     <div className="p-8 max-w-5xl mx-auto bg-blue-50 min-h-screen">
       <h1 className="text-3xl font-bold mb-8 text-center text-blue-800">AI Submissions Viewer</h1>
@@ -65,9 +69,16 @@ const AISubmissionsViewer = () => {
                         ))}
                       </ul>
                       <p><span className="font-semibold">International Alignment:</span> {org.international_alignment}</p>
-                      <p className="italic text-blue-600">
-                        Full submission filename: {org.filename}
-                      </p>
+                      {org.filename && (
+                        <a
+                          href={`${baseUrl}${encodeURIComponent(org.filename)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-blue-600 hover:text-blue-700 transition duration-150 ease-in-out mt-2"
+                        >
+                          View Full Submission <ExternalLink size={16} className="ml-1" />
+                        </a>
+                      )}
                     </div>
                   )}
                 </div>
